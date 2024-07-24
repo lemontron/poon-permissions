@@ -11,11 +11,15 @@ export const pushNotifications = new PermissionDef('PUSH_NOTIFICATIONS', {
 		if (result === 'denied') return DENIED;
 
 		const registration = await navigator.serviceWorker.ready;
-		const sub = (
-			await registration.pushManager.getSubscription()
-		) || (
-			await registration.pushManager.subscribe(opts)
-		);
+		const existing = await registration.pushManager.getSubscription();
+		if (existing) return GRANTED;
+
+		await registration.pushManager.subscribe(opts);
+		return GRANTED;
+	},
+	async getConfigAsync() {
+		const registration = await navigator.serviceWorker.ready;
+		const sub = await registration.pushManager.getSubscription();
 		if (sub) return JSON.parse(JSON.stringify(sub));
 	},
 });

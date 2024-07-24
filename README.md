@@ -36,11 +36,12 @@ Here is basic code for `setupPush()` which is called when the button is clicked.
 ```javascript
 import { showAlert, toast } from 'poon-ui';
 import { callMethod } from './util';
-import { pushNotifications, DENIED } from 'poon-permissions';
+import { pushNotifications, GRANTED } from 'poon-permissions';
 
 export const setupPush = async () => {
-    callMethod('PushNotifications', {
-        'data': await pushNotifications.askAsync(),
+    const status = await pushNotifications.askAsync();
+    if (status === GRANTED) callMethod('PushNotifications', {
+        'data': await pushNotifications.getConfigAsync(),
         'onSuccess': () => toast('Push subscribed'),
     });
 };
