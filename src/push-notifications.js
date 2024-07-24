@@ -2,9 +2,6 @@ import { DENIED, GRANTED, PermissionDef } from './util.js';
 
 export const pushNotifications = new PermissionDef('PUSH_NOTIFICATIONS', {
 	async checkAsync() {
-		const dismissed = localStorage.getItem('askPermissionPushNotificationDismissed');
-		if (dismissed) return DENIED;
-
 		const registration = await navigator.serviceWorker.ready;
 		const existing = await registration.pushManager.getSubscription();
 		return existing ? GRANTED : DENIED;

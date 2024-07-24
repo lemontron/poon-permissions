@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { PENDING, GRANTED, DENIED } from './util.js';
-import { pushNotifications } from './push-notifications.js';
+import { PENDING, GRANTED, DENIED } from './src/util.js';
+import { pushNotifications } from './src/push-notifications.js';
 
 export const usePermission = (def) => {
 	const [status, setStatus] = useState(def.status);

@@ -5,13 +5,13 @@ export const DENIED = 'denied';
 export class PermissionDef {
 	constructor(name, {askAsync, checkAsync}) {
 		this.name = name;
-		this.status = PENDING;
+		this.localStorageKey = `userDeclinedPermission/${this.name}`;
+		this.status = localStorage.getItem(this.localStorageKey) ? DENIED : PENDING;
 		this._askAsync = askAsync;
 		this._checkAsync = checkAsync;
 		this.listeners = [];
-
 		this.on(val => {
-			if (val === GRANTED) localStorage.removeItem('askPermissionPushNotificationDismissed');
+			if (val === GRANTED) localStorage.removeItem(this.localStorageKey);
 		});
 	}
 
@@ -27,12 +27,20 @@ export class PermissionDef {
 	};
 
 	checkAsync = async () => {
-		const status = this._checkAsync();
+		const dismissed = localStorage.getItem(this.localStorageKey);
+		if (dismissed) return DENIED;
+
+		const status = await this._checkAsync();
 		this._updateStatus(status);
 	};
 
 	askAsync = async () => {
-		const status = this._askAsync();
+		const status = await this._askAsync();
 		this._updateStatus(status);
+	};
+
+	userDecline = () => {
+		localStorage.setItem(this.localStorageKey, 'true');
+		this._updateStatus(DENIED);
 	};
 }

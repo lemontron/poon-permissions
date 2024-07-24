@@ -62,5 +62,6 @@ export const setupPush = async () => {
 |-----------------|--------------------------------------------------------|
 | `checkAsync`    | Check the permission status (GRANTED, PENDING, DENIED) |
 | `askAsync`      | Present the system modal and return status             |
+| `userDecline`   | Call to make checkAsync always return DENIED status    |
 | `on`            | Callback to fire when permission status changes        |
 | `_updateStatus` | Internal method to update the status manually          |
