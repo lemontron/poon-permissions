@@ -6,7 +6,7 @@
   "scripts": {},
   "author": "",
   "license": "ISC",
-  "description": "Check and ask permissions in a simple way",
+  "description": "The easiest way to manage permissions in your PWA",
   "peerDependencies": {
     "react": "latest"
   }
