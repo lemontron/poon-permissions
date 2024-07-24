@@ -66,4 +66,3 @@ export const setupPush = async () => {
 | `getConfigAsync` | Get the configuration (make sure you askAsync first!)  |
 | `userDecline`    | Call to make checkAsync always return DENIED status    |
 | `on`             | Callback to fire when permission status changes        |
-| `_updateStatus`  | Internal method to update the status manually          |
