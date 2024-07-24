@@ -1,0 +1,13 @@
+{
+  "name": "poon-permissions",
+  "type": "module",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {},
+  "author": "",
+  "license": "ISC",
+  "description": "Check and ask permissions in a simple way",
+  "peerDependencies": {
+    "react": "latest"
+  }
+}
