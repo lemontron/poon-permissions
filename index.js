@@ -4,7 +4,10 @@ import { pushNotifications } from './src/push-notifications.js';
 
 export const usePermission = (def) => {
 	const [status, setStatus] = useState(def.status);
-	useEffect(() => def.on(setStatus), [def]);
+	useEffect(() => {
+		def.checkAsync();
+		return def.on(setStatus);
+	}, [def]);
 	return status;
 };
 

@@ -14,8 +14,8 @@ export class PermissionDef {
 	}
 
 	_updateStatus = (val) => {
-		if (this.status === val) return;
 		if (val === GRANTED) localStorage.removeItem(this.localStorageKey);
+		if (this.status === val) return;
 		this.status = val;
 		this.listeners.forEach(fn => fn(val));
 	};
@@ -33,8 +33,8 @@ export class PermissionDef {
 		this._updateStatus(status);
 	};
 
-	askAsync = async () => {
-		const result = await this._askAsync();
+	askAsync = async (opts) => {
+		const result = await this._askAsync(opts);
 		if (result) {
 			this._updateStatus(GRANTED);
 			return result;
