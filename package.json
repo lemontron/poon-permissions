@@ -8,6 +8,6 @@
   "license": "ISC",
   "description": "The easiest way to manage permissions in your PWA",
   "peerDependencies": {
-    "react": "latest"
+    "react": "*"
   }
 }
